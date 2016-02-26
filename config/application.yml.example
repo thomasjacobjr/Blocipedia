@@ -1,0 +1,8 @@
+# 1.) Copy this file to application.yml
+
+# 2.) Configure application.yml with these values:
+
+aws_ses_username: "Your_user_name"
+aws_ses_password: "Your_password"
+aws_ses_address: "SMTP_server_URL"
+aws_ses_mailer_sender: "Your_email@domain.com"
