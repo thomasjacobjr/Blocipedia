@@ -1,5 +1,9 @@
+# Blocipedia runs on Amazon Web Services SES (Simple Email Service).
+#
+# Create and configure a SES account at https://aws.amazon.com/ses/ then:
+#
 # 1.) Copy this file to application.yml
-
+#
 # 2.) Configure application.yml with these values:
 
 aws_ses_username: "Your_user_name"
