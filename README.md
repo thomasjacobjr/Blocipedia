@@ -10,6 +10,8 @@ Wikis are a great way to collaborate on community-sourced content. Whether the w
 
 ### Installation ->
 
+Refer to application.yml.example for more details 
+
 
 ### How to Use Application ->
 
