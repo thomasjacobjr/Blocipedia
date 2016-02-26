@@ -16,9 +16,9 @@
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end -%>
+  <% end %>
 
-  <button type="submit" class="btn btn-default">Log In</button>
+  <%= f.submit 'Log In', :class => 'btn btn-default' %>
 <% end %>
 
 <%= render "devise/shared/links" %>
