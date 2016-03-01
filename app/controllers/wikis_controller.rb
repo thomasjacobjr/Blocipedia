@@ -16,6 +16,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
+    authorize @wiki 
+
     if @wiki.save
       flash[:notice] = "Wiki saved."
       redirect_to @wiki
@@ -35,7 +37,7 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
-    authorize @wiki 
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
