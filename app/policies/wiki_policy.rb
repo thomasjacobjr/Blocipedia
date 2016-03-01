@@ -1,12 +1,5 @@
-class WikiPolicy < ApplicationPolicy 
-  attr_reader :user, :wiki
-
-  def initialize(user, wiki)
-    @user = user
-    @wiki = wiki
-  end
-
+class WikiPolicy < ApplicationPolicy
   def update?
-    user.admin? or not wiki.published?
+    user.admin? or not record.published?
   end
 end
