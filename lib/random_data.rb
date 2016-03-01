@@ -23,4 +23,8 @@ module RandomData
     letters.shuffle!
     letters[0,rand(3..8)].join
   end
+
+  def self.random_email
+    "#{random_word}@#{random_word}.com"
+  end
 end
