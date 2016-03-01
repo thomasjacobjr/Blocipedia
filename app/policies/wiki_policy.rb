@@ -1,5 +1,5 @@
 class WikiPolicy < ApplicationPolicy
   def update?
-    user.admin? or not record.published?
+    user.admin? || user.premium? 
   end
 end
