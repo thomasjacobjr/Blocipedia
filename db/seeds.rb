@@ -23,3 +23,8 @@ N_USERS.times do
 end
 puts "#{N_USERS} additional users created."
 
+# Create a default user.
+user = User.new(email: "test@test.com", password: "testtest")
+user.skip_confirmation!
+user.save
+puts "Test user created (test@test.com / testtest)."
