@@ -1,16 +1,18 @@
 require 'random_data'
 
+N_WIKIS = 50
+N_USERS = 50
+
 # Create Wikis
-50.times do
+N_WIKIS.times do
   Wiki.create!(
     title: Faker::Hipster.sentence,
     body: Faker::Hipster.paragraph
   )
 end
-wikis = Wiki.all
 
 # Create Users
-50.times do
+N_USERS.times do
   user = User.new(
     email: Faker::Internet.email,
     password: Faker::Internet.password(8)
@@ -18,7 +20,6 @@ wikis = Wiki.all
   user.skip_confirmation!
   user.save!
 end
-users = User.all
 
 # Create a default user
 user1 = User.new(email: "standard@test.com", password: "testtest", role: 0)
@@ -36,8 +37,8 @@ user3.save
 
 
 puts "Seed finished"
-puts "#{Wiki.count} wikis created"
-puts "#{User.count} users created"
+puts "#{N_WIKIS} additional wikis created"
+puts "#{N_USERS} additional users created"
 puts "Standard user created (standard@test.com/ testtest)"
 puts "Premium user created (premium@test.com/ testtest)"
 puts "Admin user created (admin@test.com/ testest)"
