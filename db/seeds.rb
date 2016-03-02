@@ -1,15 +1,19 @@
 require 'random_data'
 
-# Create Wikis
-#50.times do
-#  Wiki.create!(
-#    title: RandomData.random_sentence,
-#    body: RandomData.random_paragraph
-#  )
-#end
-#wikis = Wiki.all
+N_WIKIS = 50
+N_USERS = 50
 
-50.times do
+# Create some wikis.
+N_WIKIS.times do
+ Wiki.create!(
+   title: RandomData.random_sentence,
+   body: RandomData.random_paragraph
+ )
+end
+puts "#{N_WIKIS} additional wikis created."
+
+# Create some users.
+N_USERS.times do
   user = User.new(
     email: RandomData.random_email,
     password: RandomData.random_word << RandomData.random_word << RandomData.random_word
@@ -17,3 +21,10 @@ require 'random_data'
   user.skip_confirmation!
   user.save!
 end
+puts "#{N_USERS} additional users created."
+
+# Create a default user.
+user = User.new(email: "test@test.com", password: "testtest")
+user.skip_confirmation!
+user.save
+puts "Test user created (test@test.com / testtest)."
