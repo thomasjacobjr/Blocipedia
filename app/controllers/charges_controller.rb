@@ -22,4 +22,12 @@ class ChargesController < ApplicationController
     flash.now[:alert] = elephant.message
     redirect_to new_charge_path
   end
+
+  def new
+    @stripe_btn_data = {
+      key: "#{ Rails.configuration.stripe[:publishable_key] }",
+      description: "Premium Lorbo - #{current_user.name}",
+      amount: Amount.default
+    }
+  end
 end
