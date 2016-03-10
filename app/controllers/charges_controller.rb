@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
     customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken],
-      plan: "premium" 
+      plan: "premium"
     )
 
     Stripe::Charge.create(
@@ -30,5 +30,9 @@ class ChargesController < ApplicationController
       description: "Premium Lorbo - #{current_user.email}",
       amount: Amount.default
     }
+  end
+
+  def destroy 
+
   end
 end
