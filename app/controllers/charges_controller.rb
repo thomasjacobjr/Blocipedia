@@ -7,6 +7,8 @@ class ChargesController < ApplicationController
       plan: "premium"
     )
 
+    current_user.stripe_id = customer.id
+
     Stripe::Charge.create(
       customer: customer.id,
       amount: Amount.default,
@@ -32,7 +34,9 @@ class ChargesController < ApplicationController
     }
   end
 
-  def destroy 
+  def destroy
+    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+    puts customer.subscriptions
 
   end
 end
