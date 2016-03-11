@@ -7,8 +7,6 @@ class ChargesController < ApplicationController
       plan: "premium"
     )
 
-    current_user.stripe_id = customer.id
-
     Stripe::Charge.create(
       customer: customer.id,
       amount: Amount.default,
@@ -16,7 +14,10 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-    current_user.role = :premium
+    current_user.update_attributes(
+      stripe_id: customer.id,
+      role: :premium,
+    )
 
     flash[:notice] = "Thanks for all the money, #{current_user.email}! You are now a Premium Lorbo."
     redirect_to edit_user_registration_path
@@ -36,7 +37,10 @@ class ChargesController < ApplicationController
 
   def destroy
     customer = Stripe::Customer.retrieve(current_user.stripe_id)
-    puts customer.subscriptions
+
+    current_user.role = :standard
+
+    flash[:notice] = "Your account has been successfully downgraded."
 
   end
 end
