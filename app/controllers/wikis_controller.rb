@@ -6,7 +6,7 @@ class WikisController < ApplicationController
   def show
     @wiki = Wiki.find(params[:id])
 
-    authorize @wiki 
+    authorize @wiki
   end
 
   def new
@@ -42,6 +42,8 @@ class WikisController < ApplicationController
 
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+
+    @wiki.update_attribute(:private, params[:wiki][:private])
 
     authorize @wiki
 
