@@ -38,10 +38,10 @@ class ChargesController < ApplicationController
   def destroy
     customer = Stripe::Customer.retrieve(current_user.stripe_id)
     # Problem code
-    subscription_id = customer.subscriptions.data.first.id
-    customer.subscriptions.retrieve(subscription_id).delete
+    #subscription_id = customer.subscriptions.data.first.id
+    #customer.subscriptions.retrieve(subscription_id).delete
 
-    current_user.update_attribute(role: :standard)
+    current_user.update_attributes(role: :standard)
 
     flash[:notice] = "Your account has been successfully downgraded."
     redirect_to edit_user_registration_path
