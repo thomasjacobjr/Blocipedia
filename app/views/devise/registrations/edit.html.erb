@@ -30,13 +30,17 @@
   <%= f.submit 'Update', :class => 'btn btn-default' %>
 <% end %>
 
-<h3>Upgrade Account</h3>
+<% if current_user.premium? %>
 
-<%= link_to "Upgrade", new_charge_path, class: 'btn btn-default' %>
+  <h3>Downgrade Account</h3>
+  <%= link_to "Downgrade", charge_path(current_user), method: :delete, class: 'btn btn-default' %>
 
-<h3>Downgrade Account</h3>
+<% else %>
 
-<%= link_to "Downgrade", charge_path(current_user), method: :delete, class: 'btn btn-default' %>
+  <h3>Upgrade Account</h3>
+  <%= link_to "Upgrade", new_charge_path, class: 'btn btn-default' %>
+
+<% end %>
 
 <h3>Cancel my account</h3>
 
