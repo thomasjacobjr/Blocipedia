@@ -1,12 +1,15 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
 
-    authorize @wiki
+    unless current_user.standard?
+      flash[:alert] = "You must be a Premium Lorbo to view private wikis."
+      redirect_to wikis_path
+    end
   end
 
   def new
@@ -57,7 +60,7 @@ class WikisController < ApplicationController
   def destroy
     @wiki = Wiki.find(params[:id])
 
-    authorize @wiki 
+    authorize @wiki
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
