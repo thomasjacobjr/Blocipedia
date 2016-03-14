@@ -13,13 +13,3 @@
   <% end %>
   </div>
 </div>
-
-<%= form_for @wiki do |f| %>
-  <% if current_user.admin? || current_user.premium? %>
-    <div class="form-group">
-      <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private wiki
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
