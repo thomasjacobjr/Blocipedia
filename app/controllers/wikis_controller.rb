@@ -1,15 +1,12 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user)
+    @wikis = Wiki.all
   end
 
   def show
     @wiki = Wiki.find(params[:id])
 
-    unless current_user.standard?
-      flash[:alert] = "You must be a Premium Lorbo to view private wikis."
-      redirect_to wikis_path
-    end
+    authorize @wiki 
   end
 
   def new
