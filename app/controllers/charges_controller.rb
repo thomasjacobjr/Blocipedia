@@ -37,10 +37,12 @@ class ChargesController < ApplicationController
 
   def destroy
     customer = Stripe::Customer.retrieve(current_user.stripe_id)
-    # Problem code
-    #subscription_id = customer.subscriptions.data.first.id
-    #customer.subscriptions.retrieve(subscription_id).delete
+    # To do - make sure we have a subscription before accessing id
+    subscription_id = customer.subscriptions.data.first.id
+    customer.subscriptions.retrieve(subscription_id).delete
 
+    # must switch all wikis from private to public
+    current_user.wikis.update_all(private: false)
     current_user.update_attributes(role: :standard)
 
     flash[:notice] = "Your account has been successfully downgraded."
