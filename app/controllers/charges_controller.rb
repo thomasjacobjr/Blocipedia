@@ -41,7 +41,8 @@ class ChargesController < ApplicationController
     subscription_id = customer.subscriptions.data.first.id
     customer.subscriptions.retrieve(subscription_id).delete
 
-
+    # must switch all wikis from private to public
+    current_user.wikis.update_all(private: false)
     current_user.update_attributes(role: :standard)
 
     flash[:notice] = "Your account has been successfully downgraded."
