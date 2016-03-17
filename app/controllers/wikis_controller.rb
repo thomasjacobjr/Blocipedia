@@ -8,8 +8,11 @@ class WikisController < ApplicationController
 
     authorize @wiki
 
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    #markdown.render(@wiki.title, @wiki.body)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+
+    # TODO - investigate how to call html_safe from controller
+    @wiki.title = markdown.render(@wiki.title)
+    @wiki.body = markdown.render(@wiki.body)
   end
 
   def new
