@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160318163038) do
 
-  create_table "collaborators", force: :cascade do |t|
+  create_table "collaborations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "wiki_id"
     t.datetime "created_at", null: false

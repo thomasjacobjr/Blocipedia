@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :premium, :admin]
 
+  def collaborations
+    Collaborator.where(user_id: id)
+  end
+
 end
