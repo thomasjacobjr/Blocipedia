@@ -1,11 +1,5 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
-
-  def collaborations
-    Collaboration.where(wiki_id: self.id)
-  end
-
-  def users
-    collaborations.users
-  end
+  has_many :collaborations
+  has_many :users, through: :collaborations 
 end
