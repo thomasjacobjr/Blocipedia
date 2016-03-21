@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
   enum role: [:standard, :premium, :admin]
 
   def collaborations
-    Collaborator.where(user_id: id)
+    Collaboration.where(user_id: self.id)
+  end
+
+  def private_wikis
+    Wiki.where( id: collaborations.pluck(:wiki_id) )
+    # Wiki.where( id: collaborations.map{ |collaboration| collaboration.wiki_id }
   end
 
 end
