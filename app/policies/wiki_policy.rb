@@ -1,16 +1,9 @@
 class WikiPolicy < ApplicationPolicy
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
+  class Scope < Scope
 
     def resolve
-      wikis = []
       if user.role == 'admin'
-        wikis = scope.all
+        return scope.all
       elsif user.role == 'premium'
         all_wikis = scope.all
         all_wikis.each do |wiki|
