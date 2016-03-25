@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+
   def index
     @wikis = policy_scope(Wiki)
   end
@@ -25,7 +26,11 @@ class WikisController < ApplicationController
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+
+    if params[:wiki][:private]
+      @wiki.private = params[:wiki][:private]
+    end
+
     unless current_user.nil?
       @wiki.user_id = current_user.id
     end
