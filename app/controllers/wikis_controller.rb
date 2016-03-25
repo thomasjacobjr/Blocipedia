@@ -27,10 +27,6 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
-    if params[:wiki][:private]
-      @wiki.private = params[:wiki][:private]
-    end
-
     unless current_user.nil?
       @wiki.user_id = current_user.id
     end
