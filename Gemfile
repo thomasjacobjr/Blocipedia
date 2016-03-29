@@ -12,6 +12,8 @@ end
 group :development do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'rails_db'
+  gem 'axlsx_rails'
 end
 
 # Use sqlite3 as the database for Active Record
