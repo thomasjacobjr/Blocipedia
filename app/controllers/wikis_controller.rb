@@ -59,6 +59,11 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
 
+    if params[:collaborator_email]
+      @wiki.collaborators << User.where(email: params[:collaborator_email])
+    end
+
+
     authorize @wiki
 
     if @wiki.save
