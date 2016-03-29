@@ -11,6 +11,11 @@
   </div>
 
   <div class="form-group">
+    <%= label_tag(:collaborator_email, "Collaborators:") %>
+    <%= text_field_tag :collaborator_email, nil, placeholder: "lorbo@lorbosdomain.com" %>
+  </div>
+
+  <div class="form-group">
     <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
 
