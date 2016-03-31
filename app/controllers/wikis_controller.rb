@@ -35,6 +35,15 @@ class WikisController < ApplicationController
       @wiki.user_id = current_user.id
     end
 
+    if params[:collaborator_email]
+      users = User.where(email: params[:collaborator_email])
+      if users.empty?
+        flash[:alert] = "No user found with this email."
+      else
+        @wiki.collaborators << users
+      end
+    end
+
     authorize @wiki
 
     if @wiki.save

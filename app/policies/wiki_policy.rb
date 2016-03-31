@@ -2,7 +2,7 @@ class WikiPolicy < ApplicationPolicy
   class Scope < Scope
 
     #TODO -- room for refactoring - we don't want to call entire collection every time!
-    
+
     def resolve
       if user.role == 'admin'
         return scope.all
@@ -11,7 +11,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.user == user || wiki.collaborations.include?(user)
+          if wiki.public? || wiki.user == user || wiki.collaborators.include?(user)
             wikis << wiki
           end
         end
@@ -20,7 +20,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.collaborations.include?(user)
+          if wiki.public? || wiki.collaborators.include?(user)
             wikis << wiki.id
           end
         end
