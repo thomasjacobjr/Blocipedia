@@ -35,14 +35,7 @@ class WikisController < ApplicationController
       @wiki.user_id = current_user.id
     end
 
-    if params[:collaborator_email]
-      users = User.where(email: params[:collaborator_email])
-      if users.empty?
-        flash[:alert] = "No user found with this email."
-      else
-        @wiki.collaborators << users
-      end
-    end
+    add_collaborators
 
     authorize @wiki
 
@@ -68,14 +61,7 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
 
-    if params[:collaborator_email] && params[:collaborator_email].present?
-      users = User.where(email: params[:collaborator_email])
-      if users.empty?
-        flash[:alert] = "No user found with this email."
-      else
-        @wiki.collaborators << users
-      end
-    end
+    add_collaborators
 
     authorize @wiki
 
@@ -99,6 +85,21 @@ class WikisController < ApplicationController
     else
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show
+    end
+  end
+
+  private
+
+  def add_collaborators
+    if params[:collaborator_email] && params[:collaborator_email].present?
+      user = User.where(email: params[:collaborator_email]).first
+      if @wiki.collaborators.include?(user)
+        flash[:alert] = "That user is already a collaborator."
+      elsif user.nil?
+        flash[:alert] = "This user does not exist."
+      else
+        @wiki.collaborators << user
+      end
     end
   end
 
