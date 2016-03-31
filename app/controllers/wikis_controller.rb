@@ -68,7 +68,7 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
 
-    if params[:collaborator_email]
+    if params[:collaborator_email] && params[:collaborator_email].present?
       users = User.where(email: params[:collaborator_email])
       if users.empty?
         flash[:alert] = "No user found with this email."
