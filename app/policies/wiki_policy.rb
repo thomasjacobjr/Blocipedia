@@ -33,6 +33,6 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.premium?
+    user.admin? || user.premium? || scope.first.collaborators.include?(user)
   end
 end
