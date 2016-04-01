@@ -4,9 +4,11 @@ class CollaboratorsController < ApplicationController
     @user = User.find(params[:id])
     @wiki = Wiki.find(params[:wiki_id])
 
-    authorize @wiki 
+    @collaboration = Collaboration.where(user_id: params[:id], wiki_id: params[:wiki_id]).first
+    
+    authorize @collaboration
 
-    if @wiki.collaborators.delete(@user)
+    if @collaboration.destroy # or @wiki.collaborators.delete(@user)
       flash[:notice] = "\"#{@user.email}\" was deleted successfully."
       redirect_to wiki_path(@wiki)
     else
