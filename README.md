@@ -1,19 +1,15 @@
-## Blocipedia Wiki Application ##
+## Blocipedia: A Wikipedia-Style Application ##
 
 Created by Thomas Jacob Jr. and Jean-Denis Vauguet at [Bloc](http://bloc.io)
+Coding Bootcamp
 
 ### Introduction ->
 
-Wikis are a great way to collaborate on community-sourced content. Whether the wiki is for a hobby or work-related project, you will build an app that lets users create their own wikis and share them publicly or privately with other collaborators.
-
-
+Blocipedia is a Ruby on Rails project that replicates the basic functionality of
+Wikipedia. It allows for users to sign up, sign in and out, create wikis, tag
+wikis, and browse through a database of other wikis.
 
 ### Installation ->
 
-Refer to application.yml.example for more details 
-
-
-### How to Use Application ->
-
-
-### How to ask for help ->
+Simply clone or download this repo, the run `bundle install` from the
+command line. All files and gems come prepackaged with the project.
